@@ -27,7 +27,7 @@ from werkzeug.wsgi import wrap_file
 
 class helpdesk_webservice(http.Controller):
 
-    @http.route(['/api/wsaddticket',], auth="public", type="json", method=['POST'], csrf=False)
+    @http.route(['/api/wsaddticket', ], auth="public", type="json", method=['POST'], csrf=False)
     def wsaddticket(self, **post):
         post = yaml.load(request.httprequest.data)
         res = {}
@@ -55,6 +55,12 @@ class helpdesk_webservice(http.Controller):
                 cliente_search = request.env['res.partner'].sudo().search([('vat', '=', rut)], limit=1)
                 if cliente_search.id:
                     cliente_id = cliente_search.id
+                else:
+                    return {
+                        "Token": hd_token,
+                        "RespCode": -1,
+                        "RespMessage": "Rut de cliente no existe"
+                    }
                 kanban_state = "normal"
                 name = post['params']['asunto']
                 description = post['params']['description']
