@@ -24,110 +24,6 @@ import os.path
 from werkzeug import urls
 from werkzeug.wsgi import wrap_file
 
-esquema = {
-            "$schema": "http://json-schema.org/draft-04/schema#",
-            "type": "object",
-            "properties": {
-                "DocNum": {
-                "type": "string"
-                },
-                "DocDate": {
-                "type": "string"
-                },
-                "CardCode": {
-                "type": "string"
-                },
-                "CardName": {
-                "type": "string"
-                },
-                "WarehouseCode": {
-                "type": "string"
-                },
-                "DatosProdOC": {
-                "type": "array",
-                "items": [
-                    {
-                    "type": "object",
-                    "properties": {
-                        "ItemCode": {
-                        "type": "string"
-                        },
-                        "ItemDescription": {
-                        "type": "string"
-                        },
-                        "Quantity": {
-                        "type": "number"
-                        },
-                        "MeasureUnit": {
-                        "type": "string"
-                        }
-                    },
-                    "required": [
-                        "ItemCode",
-                        "ItemDescription",
-                        "Quantity",
-                        "MeasureUnit"
-                    ]
-                    },
-                    {
-                    "type": "object",
-                    "properties": {
-                        "ItemCode": {
-                        "type": "string"
-                        },
-                        "ItemDescription": {
-                        "type": "string"
-                        },
-                        "Quantity": {
-                        "type": "number"
-                        },
-                        "MeasureUnit": {
-                        "type": "string"
-                        }
-                    },
-                    "required": [
-                        "ItemCode",
-                        "ItemDescription",
-                        "Quantity",
-                        "MeasureUnit"
-                    ]
-                    },
-                    {
-                    "type": "object",
-                    "properties": {
-                        "ItemCode": {
-                        "type": "string"
-                        },
-                        "ItemDescription": {
-                        "type": "string"
-                        },
-                        "Quantity": {
-                        "type": "number"
-                        },
-                        "MeasureUnit": {
-                        "type": "string"
-                        }
-                    },
-                    "required": [
-                        "ItemCode",
-                        "ItemDescription",
-                        "Quantity",
-                        "MeasureUnit"
-                    ]
-                    }
-                ]
-                }
-            },
-            "required": [
-                "DocNum",
-                "DocDate",
-                "CardCode",
-                "CardName",
-                "WarehouseCode",
-                "DatosProdOC"
-            ]
-            }
-
 
 class helpdesk_webservice(http.Controller):
 
@@ -155,10 +51,20 @@ class helpdesk_webservice(http.Controller):
             if user_id:
                 res['token'] = hd_token
                 post = post['params']
+                rut = post['params']['rut']
+                cliente_search = request.env['res.partner'].sudo().search([('vat', '=', rut)], limit=1)
+                if cliente_search.id:
+                    cliente_id = cliente_search.id
+                kanban_state = "normal"
+                name = post['params']['asunto']
+                description = post['params']['description']
+                res['token'] = hd_token
                 uid = user_id
                 nuevo_ticket = {
-                    'kanban_state': 'normal',
-                    'name': 'ticket prueba'
+                    'kanban_state': kanban_state,
+                    'vat': cliente_id,
+                    'name': name,
+                    'description': description
                 }
 
                 ticket_nuevo = request.env['helpdesk.ticket'].sudo().create(nuevo_ticket)
