@@ -62,7 +62,7 @@ class helpdesk_webservice(http.Controller):
                 uid = user_id
                 nuevo_ticket = {
                     'kanban_state': kanban_state,
-                    'vat': cliente_id,
+                    'partner_id': cliente_id,
                     'name': name,
                     'description': description
                 }
