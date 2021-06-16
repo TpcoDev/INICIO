@@ -12,7 +12,6 @@ Webservice Helpdesk
     'depends': ["base"],
     'website': 'http://theprojectcompany.cl/',
     'data': [
-        "base",
         "helpdesk"
              ],
     'demo': [],
