@@ -166,7 +166,7 @@ class helpdesk_webservice(http.Controller):
 
         except Exception as e:
             return {			
-                    "Token": token,		
+                    "Token": hd_token,		
                     "RespCode":-1,		
                     "RespMessage":"Error de conexión",
                     "error": e.args
