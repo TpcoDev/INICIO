@@ -9,10 +9,9 @@ Webservice Helpdesk
 
     """,
     'category': "Helpdesk",
-    'depends': ["base"],
+    'depends': ["base","helpdesk"],
     'website': 'http://theprojectcompany.cl/',
     'data': [
-        "helpdesk"
              ],
     'demo': [],
     'installable': True,
