@@ -56,6 +56,7 @@ class helpdesk_webservice(http.Controller):
                 asunto = post['params']['asunto']
                 kanban_state = "normal"
                 descripcion = post['params']['description']
+                _logger.error("\n\n\n\ndescripcion: %s", descripcion)
                 uid = user_id
                 nuevo_ticket = {
                     'kanban_state': kanban_state,
