@@ -34,13 +34,13 @@ class helpdesk_webservice(http.Controller):
         hd_token = uuid.uuid4().hex
         mensaje_error = {			
                         "Token": hd_token,
-                        "RespCode":-1,
-                        "RespMessage":"Error de conexión"
+                        "RespCode": -1,
+                        "RespMessage": "Error de conexión"
                     }
         mensaje_correcto = {
                     "Token": hd_token,
-                    "RespCode":0,
-                    "RespMessage":"OC recibidas correctamente"
+                    "RespCode": 0,
+                    "RespMessage": "OC recibidas correctamente"
             }
         try:
             myapikey = request.httprequest.headers.get("Authorization")
@@ -49,7 +49,7 @@ class helpdesk_webservice(http.Controller):
             user_id = request.env["res.users.apikeys"]._check_credentials(scope="rpc", key=myapikey)
             request.uid = user_id
             if user_id:
-				_logger.info("\n\nvamos aqui:")
+                _logger.info("\n\nvamos aqui:")
                 res['token'] = hd_token
                 post = post['params']
                 rut = post['params']['rut']
