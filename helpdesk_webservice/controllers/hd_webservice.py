@@ -50,7 +50,6 @@ class helpdesk_webservice(http.Controller):
             request.uid = user_id
             if user_id:
                 res['token'] = hd_token
-                post = post['params']
                 rut = post['params']['rut']
                 _logger.info("\n\nrut: %s", rut)
                 email = post['params']['email']
