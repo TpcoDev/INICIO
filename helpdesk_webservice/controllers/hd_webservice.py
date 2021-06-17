@@ -37,10 +37,10 @@ class helpdesk_webservice(http.Controller):
                         "RespCode":-1,
                         "RespMessage":"Error de conexión"
                     }
-        mensaje_correcto = {		
+        mensaje_correcto = {
                     "Token": hd_token,
-                    "RespCode":0,				
-                    "RespMessage":"OC recibidas correctamente"				
+                    "RespCode":0,
+                    "RespMessage":"OC recibidas correctamente"
             }
         try:
             myapikey = request.httprequest.headers.get("Authorization")
@@ -59,7 +59,6 @@ class helpdesk_webservice(http.Controller):
                 uid = user_id
                 nuevo_ticket = {
                     'kanban_state': kanban_state,
-                    'partner_id': cliente_id,
                     'name': asunto,
                     'description': descripcion,
                     'email': email
@@ -69,10 +68,9 @@ class helpdesk_webservice(http.Controller):
                 return mensaje_correcto
 
         except Exception as e:
-            return {			
-                    "Token": hd_token,		
-                    "RespCode":-1,		
-                    "RespMessage":"Error de conexión",
+            return {
+                    "Token": hd_token,
+                    "RespCode": -1,
+                    "RespMessage": "Error de conexión",
                     "error": e.args
                 }
-
