@@ -52,25 +52,17 @@ class helpdesk_webservice(http.Controller):
                 res['token'] = hd_token
                 post = post['params']
                 rut = post['params']['rut']
-                cliente_search = request.env['res.partner'].sudo().search([('vat', '=', rut)])[0]
-                if cliente_search.id:
-                    cliente_id = cliente_search.id
-                else:
-                    return {
-                        "Token": hd_token,
-                        "RespCode": -1,
-                        "RespMessage": "Rut de cliente no existe"
-                    }
+                email = post['params']['email']
+                asunto = post['params']['asunto']
                 kanban_state = "normal"
-                name = post['params']['asunto']
-                description = post['params']['description']
-                res['token'] = hd_token
+                descripcion = post['params']['description']
                 uid = user_id
                 nuevo_ticket = {
                     'kanban_state': kanban_state,
                     'partner_id': cliente_id,
-                    'name': name,
-                    'description': description
+                    'name': asunto,
+                    'description': descripcion,
+                    'email': email
                 }
 
                 ticket_nuevo = request.env['helpdesk.ticket'].sudo().create(nuevo_ticket)
