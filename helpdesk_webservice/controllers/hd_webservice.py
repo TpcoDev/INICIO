@@ -49,12 +49,12 @@ class helpdesk_webservice(http.Controller):
             user_id = request.env["res.users.apikeys"]._check_credentials(scope="rpc", key=myapikey)
             request.uid = user_id
             if user_id:
-                _logger.info("\n\nvamos aqui:")
                 res['token'] = hd_token
                 post = post['params']
                 rut = post['params']['rut']
                 email = post['params']['email']
                 asunto = post['params']['asunto']
+                _logger.info("\n\nvamos aqui:")
                 kanban_state = "normal"
                 descripcion = post['params']['description']
                 _logger.info("\n\n\n\ndescripcion: %s", descripcion)
