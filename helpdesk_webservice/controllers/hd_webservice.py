@@ -51,10 +51,10 @@ class helpdesk_webservice(http.Controller):
             if user_id:
                 res['token'] = hd_token
                 post = post['params']
+                _logger.info("\n\nvamos aqui: %s", hd_token)
                 rut = post['params']['rut']
                 email = post['params']['email']
                 asunto = post['params']['asunto']
-                _logger.info("\n\nvamos aqui:")
                 kanban_state = "normal"
                 descripcion = post['params']['description']
                 _logger.info("\n\n\n\ndescripcion: %s", descripcion)
