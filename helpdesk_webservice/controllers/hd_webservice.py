@@ -52,7 +52,7 @@ class helpdesk_webservice(http.Controller):
                 res['token'] = hd_token
                 post = post['params']
                 rut = post['params']['rut']
-                cliente_search = request.env['res.partner'].sudo().search([('vat', '=', rut)], limit=1)
+                cliente_search = request.env['res.partner'].sudo().search([('vat', '=', rut)])[0]
                 if cliente_search.id:
                     cliente_id = cliente_search.id
                 else:
