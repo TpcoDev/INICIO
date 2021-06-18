@@ -40,7 +40,7 @@ class helpdesk_webservice(http.Controller):
         mensaje_correcto = {
                     "Token": hd_token,
                     "RespCode": 0,
-                    "RespMessage": "OC recibidas correctamente"
+                    "RespMessage": "Ticket creado correctamente"
             }
         try:
             myapikey = request.httprequest.headers.get("Authorization")
@@ -68,7 +68,12 @@ class helpdesk_webservice(http.Controller):
                 }
 
                 ticket_nuevo = request.env['helpdesk.ticket'].sudo().create(nuevo_ticket)
-                return mensaje_correcto
+                ticket_nuevo_id = ticket_nuevo.id
+                return {
+                    "id_ticket": ticket_nuevo_id,
+                    "RespCode": 0,
+                    "RespMessage": "Ticket creado correctamente"
+            }
 
         except Exception as e:
             return {
