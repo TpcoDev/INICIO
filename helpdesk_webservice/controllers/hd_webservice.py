@@ -56,15 +56,15 @@ class helpdesk_webservice(http.Controller):
                 asunto = post['params']['asunto']
                 kanban_state = "normal"
                 descripcion = post['params']['description']
+                user = request.env['res.partner'].sudo().search([('email', '=', email)],limit=1)
                 _logger.info("\n\n\n\ndescripcion: %s", descripcion)
-                uid = user_id
+                id_tecnicoasignado = user.id
                 nuevo_ticket = {
                     'kanban_state': kanban_state,
                     'name': asunto,
                     'description': descripcion,
                     'email': email,
-                    'create_date': "2021-04-21 10:00:00",
-                    'assign_date': "2021-04-21 10:00:00"
+                    'user_id': id_tecnicoasignado
                 }
 
                 ticket_nuevo = request.env['helpdesk.ticket'].sudo().create(nuevo_ticket)
