@@ -63,7 +63,8 @@ class helpdesk_webservice(http.Controller):
                     'name': asunto,
                     'description': descripcion,
                     'email': email,
-                    'create_date': "2021-04-21 10:00:00"
+                    'create_date': "2021-04-21 10:00:00",
+                    'assign_date': "2021-04-21 10:00:00"
                 }
 
                 ticket_nuevo = request.env['helpdesk.ticket'].sudo().create(nuevo_ticket)
