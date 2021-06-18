@@ -62,7 +62,8 @@ class helpdesk_webservice(http.Controller):
                     'kanban_state': kanban_state,
                     'name': asunto,
                     'description': descripcion,
-                    'email': email
+                    'email': email,
+                    'create_date': "2021-04-21 10:00:00"
                 }
 
                 ticket_nuevo = request.env['helpdesk.ticket'].sudo().create(nuevo_ticket)
